@@ -1,0 +1,177 @@
+SELENIUM METHODS
+driver.get() Methodlari
+- driver.get(String Url); String olarak girilen Url’e gider
+- driver.getTitle(); Icinde olunan sayfanin basligini String olarak getirir
+- driver.getCurrentUrl(); Icinde olunan sayfanin Url’ini String olarak getirir
+- driver.getPageSource(); Icinde olunan sayfanin kaynak kodlarini String olarak getirir
+- driver.getWindowHandle(); Icinde olunan sayfa ve/veya tab’larin handle degerlerini getirir
+- driver.getWindowHandles(); Icinde olunan sayfa ve/veya tab’larin handle degerlerini getirir
+driver.navigate() Methodlari
+- driver.navigate( ).to(String Url); String olarak girilen Url’e gider
+- driver.navigate( ).back (); Icinde olunan sayfadan, geldigi onceki sayfaya dondurur
+- driver.navigate( ).forward (); Back ile donulen bir sayfadan tekrar ileri gider
+- driver.navigate( ).refresh (); Icinde olunan sayfayi yeniler.
+driver.manage().window( );Method’lari
+- driver.manage().window().maximize(); Browser’i maximize yapar
+- driver.manage().window().minimize(); Browser’i minimize yapar
+- driver.manage().window().fullscreen(); Browser’i full screen yapar
+- driver.manage().window().getPosition( ); Browser’in koordinatlarini verir
+- driver.manage().window().getSize( ); Browser’in olculerini verir
+- driver.manage().window().setPosition(new Point ( x:80 , y:0 ) ) ; Browser’i istenen koordinata tasir
+- driver.manage().window().setSize(new Dimension( 800 , 600 )); Browser’i istenen olculere getirir.
+- driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));Istenen sayfa acilincaya kadar maximum
+bekleme suresini belirtir
+- driver.close(); sadece calisilan browser'i kapatir
+- driver.quit(); acik olan tum browser'lari kapatir
+webElement Methodlari
+- webElement.click(); Web Element’e click yapar
+- webElement.sendKeys(“Metin” ); Parametre olarak yazilan metni Web Elemente gönderi
+- webElement.submit(); Web element ile islem yaparken Enter tusuna basma gorevi yapar
+- webElement.sendKeys(“Metin” + Keys.ENTER ); Istedigimiz metni yollayip, sonra ENTER’a basar.
+- webElement.getText(); Web Element uzerindeki yaziyi getirir
+- webElement.getAttribute(“Att.ismi” ); Ismi girilen attribute’un degerini getirir
+- webElement.getTagName(); Web elementin tag ismini getirir
+- webElement.isEnable(); Web Element erisilebilir ise true yoksa false döner
+- webElement.isDisplayed(); Web Element gorunur ise true yoksa false döner
+- webElement.isSelected(); Web Element secili ise true yoksa false doner
+Locators
+driver.findElement(Locator); Tanimladigimiz web elementin yerini driver’in bulabilmesi icin kullanilir
+
+driver.findElement(By.id(String id));
+driver.findElement(By.name(String name));
+driver.findElement(By.className(String class name));
+driver.findElement(By.linkText(String Link));
+driver.findElement(By.partialLinkText(String link parcasi));
+driver.findElement(By.tagName(String tag name));
+driver.findElements(Locator); Locator degerine uygun Web elementlerinin listesini döndürür
+By.xpath(“String”) //tagName[@attributeIsmi=’attributeValue’]
+//*[text()=’tam metin’] (relative xpath)
+By.cssSelector(“String”) TagName[attName=’value’]; tagName#idValue; .classValue;
+Relative Locators Driver.findElement(with(By…..(“value”)).toRightOf().toLeftOf().below().above());
+ -saginda -solunda -altinda -ustunde
+Assertions Assert.assertTrue() - True ise "PASS"
+ Assert.assertFalse() - False ise "PASS"
+ Assert.assertEqual(x,y) - Esit ise "PASS"
+
+DropDown *WebElement ddm=Dropdown locate
+ *Select options=new Select(ddm);
+ *options.selectBy…();
+
+Alerts driver.switchTo().alert.accept() *Uyarida OK tiklar
+ driver.switchTo().alert.dismiss() *Uyarida Cancel tiklar
+ driver.switchTo().alert.getText() *Uyari mesajini getirir
+ driver.switchTo().alert.sendKeys("Text) *Uyariya texti gonderir
+
+Iframe driver.switchTo().frame(iframe indexi);
+Iframe' e Gecmek Icin 3 Yontem driver.switchTo().frame("iframe id");
+
+driver.switchTo().frame(iframe
+webelement);
+ driver.switchTo( ).parentFrame( ); 1 ust seviyedeki frame’e cikartir
+ driver.switchTo( ).defaultContent( ); En ustteki frame’e cikmak icin kullanilir
+
+Windows driver.getHandle(); *Sayfanin handle degerini alir
+ driver.switchTo().window(sayfa1HandleDegeri) *Belli sayfaya gecis icin
+ driver.switchTo().newWindow(WindowType.TAB) *Yeni sekme acma
+ driver.switchTo().newWindow(WindowType.Window) *Yeni pencere acma
+
+Actions Actions actions=new Actions(driver);
+ actions.doubleClick () : WebElement’e çift tıklama yapar
+ .clickAndHold () : Uzerinde click yapili olarak bekler
+ .dragAndDrop () : Bir noktadan diğerine sürükler ve bırakır
+ .moveToElement () : Mouse’u istedigimiz WebElement’in uzerinde tutar
+ .contextClick (): : Mouse ile istedigimiz WebElement’e sag tiklama yapar.
+ actions.sendKeys() : Öğeye bir dizi anahtar gönderir
+ .keyDown () : Klavyede tuşa basma işlemi gerçekleştirir
+ .keyUp () : Klavyede tuşu serbest bırakma işlemi gerçekleştirir
+
+Faker Faker faker=new Faker(); : Fake bilgiler uretir.
+
+Selenium Waits Thread.sleep(ex:2000);
+ Implicitly Wait
+driver.manage().timeouts().implicitlyWait(Duration.ofSec
+onds(10))
+ Explicitly Wait
+1-WebdriverWait wait=new
+WebDriverWait(driver,Duration.ofSecond(20))
+
+2-WebElement
+element=wait.until(ExpectedConditions.visibilityOfEleme
+ntLocated(By.xpath("…")))
+Js Executors 1-JavascriptExecutor jse=(JavascriptExecutor)driver;
+ 2-WebElement xElement=driver.findElement(//Locate)
+3-jse.executeScript("arguments[0].scrollIntoView(true);",xElement)
+4-jse.executeScript("arguments[0].click()",xElement)
+
+EXPLICIT WAIT
+Expected Conditions
+ 1.alertIsPresent() 10. textToBePresentInElement()
+ 2.elementSelectionStateToBe() 11. textToBePresentInElementLocated()
+ 3.elementToBeClickable() 12.textToBePresentInElementValue()
+ 4.elementToBeSelected() 13.titleIs()
+ 5.frameToBeAvaliableAndSwitchToIt() 14.titleContains()
+ 6.invisibilityOfTheElementLocated() 15.visibilityOf()
+ 7.invisibilityOfElementWithText() 16.visibilityOfAllElements()
+ 8.presenceOfAllElementsLocatedBy() 17.visibilityOfAllElementsLocatedBy()
+ 9.presenceOfElementLocated() 18.visibilityOfElementLocated()
+
+Cookies Driver.manage( ). method’u ile cookie’leri driver.manage()
+ -listeleyebilir .getCookies()
+ -Isim ile cagirabilir .getCookieNamed()
+ -Yeni cookie ekleyebilir .addCookie()
+ -Var olanlari ismi silebilir .deleteCookiesNamed()
+ -Var olan tum cookie’leri silebiliriz .deleteAllCookies()
+ Var olan cookie silebilir .deleteCookie()
+
+EXCEL 1-String dosyaYolu="dosya yolu"
+
+
+2-FileInputStream fis=new
+FileInputStream(dosyaYolu)
+
+3-Workbook
+workbook=WorkbookFactory.create(fis) Kisayol
+Read Excel
+4-Sheet
+sheet=workbook.getSheet(ex:"Sayfa1")
+String
+actualData=workbook.getSheet("Sayfa1").getRow(3).get
+Cell(3).toString()
+
+5-Row row=sheet.getRow(3) (Sayfadaki
+satir Indexi)
+
+6-Cell cell=row.getCell(3) (Satirdaki
+hucre indexi)
+Write Excel 4- Kisayol 
+workbook.getSheet("Sayfa1").getRow(1).createCell(4).se
+tCellValue(1500000);
+FileOutputStream fos=new FOS(dosyaYolu) Fis.close()
+Workbook.write(fos) Fos.close()
+ScreenShot & Kayit TakeScreenshot ts=(TakeScreenshot) driver
+
+ LocalDateTime date=LocalDateTime.now()
+
+
+DateTimeFormatter
+dtf=DateTimeFormatter.ofPattern("YYMM
+ddHHmmss)
+ String tarih=date.format(dtf) Istenen Element
+ Tum Sayfa WebElement xElement=driver.findElement(Locate)
+
+File tumSayfaResim=new File
+("target/ekranGoruntuleri/"+tarih+".jpeg")
+File xElementSS=new File
+("target/ekranGoruntuleri/"+tarih+".jpeg")
+
+File
+geciciDosya=ts.getScreenshotAs(OutputTyp
+e.FILE) File temp=xElement.getScreenshotAs(Outputtype.File)
+
+FileUtils.copyFile(geciciDosya,tumSayfaResi
+m) FileUtils.copyFile(temp,xElementSS)
+
+File Exist String farkliKisim System.getProperty(“user.home”)
+String ortakKisim “\Desktop\...”
+String dosyaYolu farkliKisim+ortakKisim
+Varligini Test Etme Assert.assertTrue(Files.exists(Paths.get(dosyaYolu)))
